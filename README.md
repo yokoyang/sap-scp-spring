@@ -22,3 +22,6 @@ cf apps
 
 demo-java        started           1/1         256M     1G     demo-java.cfapps.eu10.hana.ondemand.com
 
+# Important thing
+
+the config file is the manifest.yml, you should read it before start.
