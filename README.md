@@ -1,7 +1,8 @@
 # sap-scp-spring deploy
 in cmd terminal (I suggest use Cmder)
 
-λ cf login
+cf login
+
 API 端點: https://api.cf.eu10.hana.ondemand.com
 
 Email>
