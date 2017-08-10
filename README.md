@@ -20,7 +20,8 @@ If you want to see all your Apps, type:
 
 cf apps
 
-demo-java        started           1/1         256M     1G     demo-java.cfapps.eu10.hana.ondemand.com
+demo-java        started           1/1         256M     1G     
+demo-java.cfapps.eu10.hana.ondemand.com
 
 # Important thing
 
