@@ -9,13 +9,13 @@ public class HelloController {
 
     @RequestMapping("/")
     public Person index() {
-        return new Person((long) 1, "hh");
+        return new Person((long) 1, "Nice to meet you");
     }
 
 
     @RequestMapping("/hello")
     public Person hello() {
-        return new Person((long) 2, "smb");
+        return new Person((long) 2, "POC");
     }
 
 
