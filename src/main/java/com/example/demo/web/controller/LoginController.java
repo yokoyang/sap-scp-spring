@@ -4,8 +4,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
-import com.example.demo.web.Utils.SSLUtil;
-import com.example.demo.web.model.LoginInput;
+import com.example.demo.web.model.LoginInputViewModel;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,17 +22,15 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
-import static org.springframework.http.HttpMethod.*;
-
 @RestController
 public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody LoginInput loginInput) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+    public String login(@RequestBody LoginInputViewModel loginInput) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 
-        loginInput.setCompanyDB("SBODEMOUS");
-        loginInput.setPassword("manager");
+        loginInput.setCompany_db("SBODEMOUS");
+        loginInput.setPassWord("manager");
         loginInput.setUserName("manager");
 
         TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
@@ -67,7 +64,7 @@ public class LoginController {
         MultiValueMap<String, String> requestHeaders = new LinkedMultiValueMap<String, String>();
         requestHeaders.add("Content-Type", "application/json");
 
-        HttpEntity<LoginInput> request = new HttpEntity<LoginInput>(loginInput, requestHeaders);
+        HttpEntity<LoginInputViewModel> request = new HttpEntity<LoginInputViewModel>(loginInput, requestHeaders);
         return restTemplate.postForObject(url, request, String.class);
 
     }
