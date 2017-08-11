@@ -2,7 +2,6 @@ package com.example.demo.web.Utils;
 
 import javax.net.ssl.*;
 import java.security.*;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
 public final class SSLUtil {

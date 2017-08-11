@@ -4,6 +4,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
+import com.example.demo.web.Utils.SSLUtil;
 import com.example.demo.web.model.LoginInputViewModel;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
@@ -26,40 +27,17 @@ import java.security.cert.X509Certificate;
 public class LoginController {
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
     public String login(@RequestBody LoginInputViewModel loginInput) throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 
-        loginInput.setCompany_db("SBODEMOUS");
-        loginInput.setPassWord("manager");
-        loginInput.setUserName("manager");
-
-        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
-        SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-                .loadTrustMaterial(null, acceptingTrustStrategy)
-                .build();
-        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLSocketFactory(csf)
-                .build();
-
-        HttpComponentsClientHttpRequestFactory requestFactory =
-                new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setHttpClient(httpClient);
-
-
         final String url = "https://10.58.106.72:50000/b1s/v1/Login";
-//        SSLUtil.turnOffSslChecking();
+        SSLUtil.turnOffSslChecking();
         RestTemplate restTemplate = new RestTemplate();
         HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
             public boolean verify(String hostname, SSLSession session) {
                 return true;
             }
         });
-        // Create the request body as a MultiValueMap
-//        MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
-//        body.add("CompanyDB", loginInput.getCompanyDB());
-//        body.add("Password", loginInput.getPassword());
-//        body.add("UserName", loginInput.getUserName());
 
         MultiValueMap<String, String> requestHeaders = new LinkedMultiValueMap<String, String>();
         requestHeaders.add("Content-Type", "application/json");
